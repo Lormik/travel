@@ -3,11 +3,19 @@
 ## Contents
 
 1. About
-2. Technologies
+2. Scope
+3. Technologies
 
 ## About
 
 Travel is a random journey generator where the user specifies how far they wish to travel and the program gives them their random directions.
+
+## Scope
+
+- User adds distance they wish to travel
+- Program breaks journey down into sections
+- Gives a random direction and the section travel length
+- Output is a series of random directions up to the users travel length 
 
 ## Technologies
 
