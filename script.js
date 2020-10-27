@@ -94,10 +94,11 @@ const route = (num) => {
 }
 
 
-route(0.4);
-route(0.5);
-route(0.6);
-route();
-route(10);
+route(0.9);
+route(1);
+route(1.1);
+route(15);
+route(20);
 route(100);
 route(45.8);
+route();
