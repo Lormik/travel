@@ -5,11 +5,17 @@
 
 // distance is in km and to 1dp
 // function to create a random distance
-const distance = () => {
-    let pre = Math.floor(Math.random() * 50);
-    let post = Math.floor(Math.random() * 10)/10;
-    let num = pre + post;
-    return num;
+const distance = (dist) => {
+    if (arguments.length === 0) {
+        let pre = Math.floor(Math.random() * 50);
+        let post = Math.floor(Math.random() * 10)/10;
+        let num = pre + post;
+        return num;
+    } else if (arguments.length > 0) {
+        let pre = Math.floor(Math.random() * dist);
+        let post = Math.floor(Math.random() * 10)/10;
+        let num = pre + post;
+    }
 }
 
 // number of turns/breakpoints
@@ -24,30 +30,45 @@ const way = () => {
 }
 
 //input is the distance to travel
-const directions = (num) => {
+const route = (num) => {
     // Create distance remaining counter rem
-    let rem = num - 0;
+    let remDist = num - 0;
 
     // Create empty array to store directions and lengths
-    let route = [];
+    let whichWay = [];
 
     // if dist rem < 0.5 pick direction and go that far
-    if (rem < 0.5) {
-        // direction
-        way();
-        // distance
-        Math.floor(Math.random() * (rem * 10))/10;
+    while (remDist > 0) {
+        if (remDist < 0.5) {
+            // direction
+            let dir = way();
+            
+            // distance
+            
+            // merge dir and dist
+            whichWay.push(`${dir} for ${remDist}`);
+            
+            // take distance off counter
+            remDist = 0;
 
-    } else if (rem >= 0.5) {
-        // direction
-        route.push(way());
-        
-        // distance
-
+        } else if (remDist >= 0.5) {
+            // direction
+            let dir = way();
+            
+            // distance
+            let dist = distance(remDist);
+            
+            // merge dir and dist
+            whichWay.push(`${dir} for ${dist}`);
+            
+            //take distance off counter
+            remDist = remDist - dist;
+        }
     }
+    
+    return whichWay;
 
     // if dist rem > 0.5 pick random distance between 0 and rem 
-
 
     // join array to form output of directions
     // first how far you want to go
