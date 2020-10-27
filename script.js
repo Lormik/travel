@@ -14,18 +14,9 @@ const distance = (dist) => {
         let num = pre + post;
         return num;
     } else if (arguments.length > 0) {
-        // case for distance < 1
         if (dist < 1) {
             // case for distance > 1
-            // before decimal point
-            let pre = 0;
-            
-            // after decimal point
-            let decimal = dist * 10;
-            let post = Math.floor(Math.random() * decimal)/10;
-            
-            // merge
-            let num = pre + post;
+            let num = dist;
             return num;
         } else if (dist >= 1) {
             // case for distance > 1
@@ -39,8 +30,6 @@ const distance = (dist) => {
             let num = pre + post;
             return num;
         }
-
-        
     }
 }
 
@@ -69,7 +58,7 @@ const route = (num) => {
     // while distRem > 0.5 choose a random distance/direction 
     // if dist rem < 0.5 pick random direction and go that far
     while (remDist > 0) {
-        if (remDist < 0.5) {
+        if (remDist < 1) {
             // random direction
             let dir = way();
             
@@ -81,7 +70,7 @@ const route = (num) => {
             // set remDist to 0 to end loop
             remDist = 0;
 
-        } else if (remDist >= 0.5) {
+        } else if (remDist >= 1) {
             // direction
             let dir = way();
             
