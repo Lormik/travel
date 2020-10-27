@@ -14,6 +14,8 @@ const distance = (dist = randNum()) => {
         return dist;
     } else if (dist >= 1) {
         // case for distance > 1
+        // error for if returns 0
+        
         return randNum(dist);
     }
 }
@@ -43,10 +45,11 @@ const route = (num = distance()) => {
             // random direction
             let dir = way();
             
-            // distance will be remDist
+            // distance will be remDist using number.toFixed
+            let fix = (remDist).toFixed(1);
             
             // merge dir and remDist and push to instruction array
-            whichWay.push(`${dir} for ${remDist} km.`);
+            whichWay.push(`${dir} for ${fix} km.`);
             
             // set remDist to 0 to end loop
             remDist = 0;
@@ -83,3 +86,6 @@ route(20);
 route(100);
 route(45.8);
 route();
+
+
+route(75);
