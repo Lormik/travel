@@ -86,3 +86,11 @@ const route = (num) => {
 
 }
 
+
+route(0.4);
+route(0.5);
+route(0.6);
+route();
+route(10);
+route(100);
+route(45.8);
