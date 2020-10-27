@@ -1,35 +1,20 @@
 // distance is in km and to 1dp
 
+// random number generator
+// undefined set to 100
+const randNum = (num = 100) => {
+    return Math.floor(Math.random() * num) + (Math.floor(Math.random() * 10) / 10)
+}
+
 // create a random distance less than the argument
 // if no argument passed, create a number between 0 and 100.
-const distance = (dist) => {
-    if (arguments.length === 0) {
-        // before decimal point
-        let pre = Math.floor(Math.random() * 100);
-
-        // after decimal point
-        let post = Math.floor(Math.random() * 10)/10;
-        
-        // merge
-        let num = pre + post;
-        return num;
-    } else if (arguments.length > 0) {
-        if (dist < 1) {
-            // case for distance > 1
-            let num = dist;
-            return num;
-        } else if (dist >= 1) {
-            // case for distance > 1
-            // before decimal point
-            let pre = Math.floor(Math.random() * dist);
-            
-            // after decimal point
-            let post = Math.floor(Math.random() * 10)/10;
-            
-            // merge
-            let num = pre + post;
-            return num;
-        }
+const distance = (dist = randNum()) => {
+    if (dist < 1) {
+        // case for distance > 1
+        return dist;
+    } else if (dist >= 1) {
+        // case for distance > 1
+        return randNum(dist);
     }
 }
 
@@ -39,15 +24,11 @@ const options = ['left', 'right', 'forward'];
 
 // randomly pick a direction to go
 const way = () => {
-    return options[Math.floor(Math.random() * options.length)];
+    return options[Math.floor(randNum(options.length))];
 }
 
 //input is the distance we want to travel, if no input we will do a random journey
-const route = (num) => {
-
-    if (arguments.length === 0) {
-        let num = distance();
-    }
+const route = (num = distance()) => {
 
     // Create distance remaining counter remDist
     let remDist = num - 0;
