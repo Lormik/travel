@@ -14,21 +14,39 @@ const distance = (dist) => {
         let num = pre + post;
         return num;
     } else if (arguments.length > 0) {
-        // before decimal point
-        let pre = Math.floor(Math.random() * dist);
+        // case for distance < 1
+        if (dist < 1) {
+            // case for distance > 1
+            // before decimal point
+            let pre = 0;
+            
+            // after decimal point
+            let decimal = dist * 10;
+            let post = Math.floor(Math.random() * decimal)/10;
+            
+            // merge
+            let num = pre + post;
+            return num;
+        } else if (dist >= 1) {
+            // case for distance > 1
+            // before decimal point
+            let pre = Math.floor(Math.random() * dist);
+            
+            // after decimal point
+            let post = Math.floor(Math.random() * 10)/10;
+            
+            // merge
+            let num = pre + post;
+            return num;
+        }
+
         
-        // after decimal point
-        let post = Math.floor(Math.random() * 10)/10;
-        
-        // merge
-        let num = pre + post;
-        return num;
     }
 }
 
 
 // 4 Directions that can be taken left, right, forward, go back 
-const options = ['left', 'right', 'forward', 'go back'];
+const options = ['left', 'right', 'forward'];
 
 // randomly pick a direction to go
 const way = () => {
@@ -51,19 +69,19 @@ const route = (num) => {
     // while distRem > 0.5 choose a random distance/direction 
     // if dist rem < 0.5 pick random direction and go that far
     while (remDist > 0) {
-        if (remDist <= 0.5) {
+        if (remDist < 0.5) {
             // random direction
             let dir = way();
             
             // distance will be remDist
             
             // merge dir and remDist and push to instruction array
-            whichWay.push(` finally ${dir} for ${remDist}.`);
+            whichWay.push(`${dir} for ${remDist} km.`);
             
             // set remDist to 0 to end loop
             remDist = 0;
 
-        } else if (remDist > 0.5) {
+        } else if (remDist >= 0.5) {
             // direction
             let dir = way();
             
@@ -71,7 +89,7 @@ const route = (num) => {
             let dist = distance(remDist);
             
             // merge dir and dist
-            whichWay.push(`${dir} for ${dist}`);
+            whichWay.push(`${dir} for ${dist} km`);
             
             //take distance off counter
             remDist = remDist - dist;
@@ -79,7 +97,7 @@ const route = (num) => {
     }
 
     //join array to form output of directions
-    let routeDirection = `Let's go on a trip of distance ${num} km` + whichWay.join(", then ") + `Oh no, we're lost!`;
+    let routeDirection = `Let's travel for ${num} km. Go `  + whichWay.join(", then ") + ` Oh no, we're lost!`;
     
     // print the journey info
     console.log(routeDirection);
