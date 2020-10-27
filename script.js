@@ -58,7 +58,7 @@ const route = (num) => {
     // while distRem > 0.5 choose a random distance/direction 
     // if dist rem < 0.5 pick random direction and go that far
     while (remDist > 0) {
-        if (remDist < 1) {
+        if (remDist <= 1) {
             // random direction
             let dir = way();
             
@@ -70,7 +70,7 @@ const route = (num) => {
             // set remDist to 0 to end loop
             remDist = 0;
 
-        } else if (remDist >= 1) {
+        } else if (remDist > 1) {
             // direction
             let dir = way();
             
