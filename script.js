@@ -12,15 +12,32 @@ const distance = () => {
 }
 
 // number of turns/breakpoints
-// Each break must be at least 1km
-// The final break can be less that 1km
-// 3 Directions that can be taken left, right, forward
+// Each distance must be at least 0.5km
+// If distance < 0.5km this will go to the end
+// 4 Directions that can be taken left, right, forward, go back 
 
-const options = ['left', 'right', 'forward'];
+// pick a direction to go
+const options = ['left', 'right', 'forward', 'go back'];
+const way = () => {
+    return way[Math.floor(Math.random() * options.length)]
+}
 
 //input is the distance to travel
 const directions = (num) => {
+    // Create distance remaining counter rem
+    let rem = num - 0;
     
+    // Create empty array to store directions and lengths
+    let route = [];
+
+    // if dist rem < 0.5 pick direction and go that far
+    if (rem < 0.5) {
+        way()
+    }
+
+    // if dist rem > 0.5 pick random distance between 0 and rem 
+
+    // join array to form output of directions
 }
 
 
