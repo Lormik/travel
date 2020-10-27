@@ -1,23 +1,28 @@
 // distance is in km and to 1dp
 
-// create a random distance
+// create a random distance less than the argument
 // if no argument passed, create a number between 0 and 100.
 const distance = (dist) => {
     if (arguments.length === 0) {
         // before decimal point
         let pre = Math.floor(Math.random() * 100);
-        // after deimal point
+
+        // after decimal point
         let post = Math.floor(Math.random() * 10)/10;
+        
         // merge
         let num = pre + post;
         return num;
     } else if (arguments.length > 0) {
         // before decimal point
         let pre = Math.floor(Math.random() * dist);
+        
         // after decimal point
         let post = Math.floor(Math.random() * 10)/10;
+        
         // merge
         let num = pre + post;
+        return num;
     }
 }
 
@@ -41,7 +46,7 @@ const route = (num) => {
     let remDist = num - 0;
 
     // Create empty array to store direction/length instruction strings
-    let whichWay = [];
+    const whichWay = [];
 
     // while distRem > 0.5 choose a random distance/direction 
     // if dist rem < 0.5 pick random direction and go that far
@@ -53,7 +58,7 @@ const route = (num) => {
             // distance will be remDist
             
             // merge dir and remDist and push to instruction array
-            whichWay.push(`${dir} for ${remDist}`);
+            whichWay.push(` finally ${dir} for ${remDist}.`);
             
             // set remDist to 0 to end loop
             remDist = 0;
@@ -73,14 +78,11 @@ const route = (num) => {
         }
     }
 
-    return whichWay;
-
-    // if dist rem > 0.5 pick random distance between 0 and rem 
-
-    // join array to form output of directions
-    // first how far you want to go
-    // then step by step directionss
-    // final statement saying oh no we are lost
+    //join array to form output of directions
+    let routeDirection = `Let's go on a trip of distance ${num} km` + whichWay.join(", then ") + `Oh no, we're lost!`;
+    
+    // print the journey info
+    console.log(routeDirection);
 
 }
 
