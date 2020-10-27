@@ -1,57 +1,64 @@
-// random direction generator
-
-
-// random distance total
-
 // distance is in km and to 1dp
-// function to create a random distance
+
+// create a random distance
+// if no argument passed, create a number between 0 and 100.
 const distance = (dist) => {
     if (arguments.length === 0) {
-        let pre = Math.floor(Math.random() * 50);
+        // before decimal point
+        let pre = Math.floor(Math.random() * 100);
+        // after deimal point
         let post = Math.floor(Math.random() * 10)/10;
+        // merge
         let num = pre + post;
         return num;
     } else if (arguments.length > 0) {
+        // before decimal point
         let pre = Math.floor(Math.random() * dist);
+        // after decimal point
         let post = Math.floor(Math.random() * 10)/10;
+        // merge
         let num = pre + post;
     }
 }
 
-// number of turns/breakpoints
-// Each distance must be at least 0.5km
-// If distance < 0.5km this will go to the end
-// 4 Directions that can be taken left, right, forward, go back 
 
-// pick a direction to go
+// 4 Directions that can be taken left, right, forward, go back 
 const options = ['left', 'right', 'forward', 'go back'];
+
+// randomly pick a direction to go
 const way = () => {
-    return options[Math.floor(Math.random() * options.length)]
+    return options[Math.floor(Math.random() * options.length)];
 }
 
-//input is the distance to travel
+//input is the distance we want to travel, if no input we will do a random journey
 const route = (num) => {
-    // Create distance remaining counter rem
+
+    if (arguments.length === 0) {
+        let num = distance();
+    }
+
+    // Create distance remaining counter remDist
     let remDist = num - 0;
 
-    // Create empty array to store directions and lengths
+    // Create empty array to store direction/length instruction strings
     let whichWay = [];
 
-    // if dist rem < 0.5 pick direction and go that far
+    // while distRem > 0.5 choose a random distance/direction 
+    // if dist rem < 0.5 pick random direction and go that far
     while (remDist > 0) {
-        if (remDist < 0.5) {
-            // direction
+        if (remDist <= 0.5) {
+            // random direction
             let dir = way();
             
-            // distance
+            // distance will be remDist
             
-            // merge dir and dist
+            // merge dir and remDist and push to instruction array
             whichWay.push(`${dir} for ${remDist}`);
             
-            // take distance off counter
+            // set remDist to 0 to end loop
             remDist = 0;
 
-        } else if (remDist >= 0.5) {
+        } else if (remDist > 0.5) {
             // direction
             let dir = way();
             
@@ -65,7 +72,7 @@ const route = (num) => {
             remDist = remDist - dist;
         }
     }
-    
+
     return whichWay;
 
     // if dist rem > 0.5 pick random distance between 0 and rem 
